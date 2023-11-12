@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int cloudsMove;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
+    public GameObject coinPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         CreateSky();
         InvokeRepeating("SpawnEnemyOne", 1f, 2f);
+        InvokeRepeating("SpawnCoin", 5f, 10f);
         cloudsMove = 1;
         score = 0;
         scoreText.text = "Score: " + score;
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void SpawnEnemyOne()
@@ -38,9 +39,14 @@ public class GameManager : MonoBehaviour
         Instantiate(enemyOnePrefab, new Vector3(Random.Range(-8, 8), 7.5f, 0), Quaternion.Euler(0, 0, 180));
     }
 
+    void SpawnCoin()
+    {
+        Instantiate(coinPrefab, new Vector3(Random.Range(-8, 8), 7.5f, 0), Quaternion.identity);
+    }
+
     void CreateSky()
     {
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 50; i++) 
         {
             Instantiate(cloudPrefab, new Vector3(Random.Range(-11f, 11f), Random.Range(-7.5f, 7.5f), 0), Quaternion.identity);
         }
