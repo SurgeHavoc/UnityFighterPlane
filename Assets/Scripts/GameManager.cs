@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
     public GameObject coinPrefab;
+    private GameObject pS;
+    public int livesCount;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +27,15 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnCoin", 5f, 10f);
         cloudsMove = 1;
         score = 0;
+        pS = GameObject.Find("Player");
         scoreText.text = "Score: " + score;
+        livesText.text = "Lives: " + livesCount;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        updateLives();
     }
 
     void SpawnEnemyOne()
@@ -62,5 +66,11 @@ public class GameManager : MonoBehaviour
     {
         score = score + scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+
+    public void updateLives()
+    {
+        livesCount = pS.GetComponent().lives;
+        livesText.text = "Lives: " + livesCount;
     }
 }
