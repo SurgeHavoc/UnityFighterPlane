@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void updateLives()
     {
-        livesCount = pS.GetComponent().lives;
+        livesCount = pS.GetComponent<Player>().lives;
         livesText.text = "Lives: " + livesCount;
     }
 }
